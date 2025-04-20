@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn Clone</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  background-color: #f3f2ef;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  height: 52px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 34px;
+  height: 34px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #eef3f8;
+  border-radius: 4px;
+  padding: 0 8px;
+  margin-left: 8px;
+  height: 34px;
+  width: 280px;
+}
+
+.search-box i {
+  color: rgba(0, 0, 0, 0.6);
+  margin-right: 8px;
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+}
+
+nav ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 12px;
+}
+
+nav ul li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+}
+
+nav ul li a i {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+nav ul li a.active {
+  color: black;
+}
+
+.profile-dropdown img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.divider {
+  height: 24px;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 0 12px;
+}
+
+.premium {
+  display: flex;
+  align-items: center;
+}
+
+.premium a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  margin: 0 12px;
+}
+
+.premium a i {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.premium-link {
+  color: #915907 !important;
+  text-decoration: underline;
+}
+
+/* Main Content Styles */
+main {
+  display: grid;
+  grid-template-columns: 225px 1fr 300px;
+  gap: 24px;
+  margin: 24px auto;
+  max-width: 1128px;
+}
+
+/* Left Sidebar Styles */
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-card {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.profile-card .background {
+  height: 56px;
+  background-color: #a0b4b7;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 12px;
+  margin-top: -24px;
+  text-align: center;
+}
+
+.profile-info img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+.profile-info h2 {
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+.profile-info p {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.profile-stats {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px;
+}
+
+.profile-stats .stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.profile-stats .stat p {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.profile-stats .stat span {
+  color: #0a66c2;
+  font-weight: 600;
+}
+
+.premium-section {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px;
+}
+
+.premium-section p {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.premium-section a {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.premium-section a i {
+  color: #915907;
+  margin-right: 4px;
+}
+
+.items {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px;
+}
+
+.items a {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+}
+
+.items a i {
+  margin-right: 8px;
+}
+
+.groups-section {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.groups-header {
+  padding: 12px;
+}
+
+.groups-header h3 {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.groups-section ul {
+  padding: 0 12px;
+}
+
+.groups-section ul li {
+  margin-bottom: 8px;
+}
+
+.groups-section ul li a {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.groups-section ul li a i {
+  margin-right: 8px;
+}
+
+.groups-footer {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.groups-footer a {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.discover-more {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  text-align: center;
+}
+
+.discover-more a {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+}
+
+/* Feed Styles */
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.post-form {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+}
+
+.input-area {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.input-area img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 8px;
+  object-fit: cover;
+}
+
+.input-area button {
+  flex: 1;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 35px;
+  padding: 12px 16px;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+}
+
+.post-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-options button {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.post-options button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.post-options button i {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.sort-by {
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.sort-by hr {
+  flex: 1;
+  border: none;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.08);
+  margin-right: 8px;
+}
+
+.sort-by span {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.post {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  margin-bottom: 8px;
+}
+
+.post-header {
+  display: flex;
+  padding: 12px 16px;
+}
+
+.post-header img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 8px;
+  object-fit: cover;
+}
+
+.post-info {
+  flex: 1;
+}
+
+.post-info h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.post-info p {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.post-info span {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.more-options {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.post-content {
+  padding: 0 16px 12px;
+}
+
+.post-image img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.post-stats {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.reactions, .comments-shares {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 12px;
+}
+
+.post-actions button {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.post-actions button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.post-actions button i {
+  margin-right: 4px;
+  font-size: 18px;
+}
+
+/* Right Sidebar Styles */
+.right-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.news-section {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+}
+
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.news-header h2 {
+  font-size: 16px;
+}
+
+.news-header i {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.news-list li {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.news-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: #000;
+  border-radius: 50%;
+  margin-top: 6px;
+  margin-right: 8px;
+}
+
+.news-content h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.news-content p {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.show-more {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+}
+
+.ad-section {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.ad-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.ad-content {
+  padding: 0 12px 12px;
+  text-align: center;
+}
+
+.ad-content p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.ad-images {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.ad-images img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin: 0 4px;
+}
+
+.ad-content button {
+  background-color: #0a66c2;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.footer {
+  margin-top: 8px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 4px 8px;
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.copyright img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  main {
+    grid-template-columns: 225px 1fr;
+  }
+  
+  .right-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
+  
+  .left-sidebar {
+    display: none;
+  }
+  
+  .search-box {
+    width: 200px;
+  }
+  
+  nav ul li span {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .search-box {
+    display: none;
+  }
+  
+  .post-options {
+    flex-wrap: wrap;
+  }
+  
+  .post-options button {
+    flex: 1;
+    min-width: 50%;
+    padding: 8px;
+  }
+  
+  .header-right {
+    justify-content: flex-end;
+  }
+  
+  .premium {
+    display: none;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+      </div>
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search">
+      </div>
+    </div>
+    <div class="header-right">
+      <nav>
+        <ul>
+          <li>
+            <a href="#" class="active">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-user-friends"></i>
+              <span>My Network</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-briefcase"></i>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-comment-dots"></i>
+              <span>Messaging</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-bell"></i>
+              <span>Notifications</span>
+            </a>
+          </li>
+          <li class="profile-dropdown">
+            <a href="#">
+              <img src="1744909812280.jpeg" alt="Profile">
+              <span>Me <i class="fas fa-caret-down"></i></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="divider"></div>
+      <div class="premium">
+        <a href="#">
+          <i class="fas fa-th"></i>
+          <span>Work <i class="fas fa-caret-down"></i></span>
+        </a>
+        <a href="#" class="premium-link">Try Premium Free</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Left Sidebar -->
+    <aside class="left-sidebar">
+      <div class="profile-card">
+        <div class="background"></div>
+        <div class="profile-info">
+          <img src="1744909812280.jpeg" alt="Profile">
+          <h2>Asal alhawari</h2>
+          <p>Full Stack Developer</p>
+        </div>
+        <div class="profile-stats">
+          <div class="stat">
+            <p>Who viewed your profile</p>
+            <span>47</span>
+          </div>
+          <div class="stat">
+            <p>Views of your post</p>
+            <span>238</span>
+          </div>
+        </div>
+        <div class="premium-section">
+          <p>Access exclusive tools & insights</p>
+          <a href="#"><i class="fas fa-square"></i> Try Premium Free</a>
+        </div>
+        <div class="items">
+          <a href="#"><i class="fas fa-bookmark"></i> My Items</a>
+        </div>
+      </div>
+      <div class="groups-section">
+        <div class="groups-header">
+          <h3>Recent</h3>
+        </div>
+        <ul>
+          <li><a href="#"><i class="fas fa-users"></i> Web Development Group</a></li>
+          <li><a href="#"><i class="fas fa-users"></i> JavaScript Developers</a></li>
+          <li><a href="#"><i class="fas fa-users"></i> UI/UX Design</a></li>
+        </ul>
+        <div class="groups-footer">
+          <a href="#">Groups</a>
+          <a href="#">Events <i class="fas fa-plus"></i></a>
+          <a href="#">Followed Hashtags</a>
+        </div>
+        <div class="discover-more">
+          <a href="#">Discover more</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Feed -->
+    <section class="feed">
+      <div class="post-form">
+        <div class="input-area">
+          <img src="1744909812280.jpeg" alt="Profile">
+          <button>Start a post</button>
+        </div>
+        <div class="post-options">
+          <button><i class="fas fa-image" style="color: #70b5f9;"></i> Photo</button>
+          <button><i class="fas fa-video" style="color: #7fc15e;"></i> Video</button>
+          <button><i class="fas fa-calendar" style="color: #e7a33e;"></i> Event</button>
+          <button><i class="fas fa-newspaper" style="color: #fc9295;"></i> Write article</button>
+        </div>
+      </div>
+
+      <div class="sort-by">
+        <hr>
+        <span>Sort by: <strong>Top <i class="fas fa-caret-down"></i></strong></span>
+      </div>
+
+      <!-- New Post about LinkedIn Clone -->
+      <div class="post">
+        <div class="post-header">
+          <img src="1744909812280.jpeg" alt="Profile">
+          <div class="post-info">
+            <h3>Asal alhawari</h3>
+            <p>Full Stack Developers</p>
+            <span>Just now • <i class="fas fa-globe-americas"></i></span>
+          </div>
+          <button class="more-options"><i class="fas fa-ellipsis-h"></i></button>
+        </div>
+        <div class="post-content">
+          <p>Excited to share my latest project - I've created this LinkedIn clone from scratch using HTML, CSS, and JavaScript! It was a great learning experience to recreate the LinkedIn interface. #WebDevelopment #FrontEnd #LinkedInClone</p>
+        </div>
+        <div class="post-image">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="LinkedIn Clone Project">
+        </div>
+        <div class="post-stats">
+          <div class="reactions">
+            <span><i class="fas fa-thumbs-up" style="color: #0a66c2;"></i> <i class="fas fa-lightbulb" style="color: #f5bb5c;"></i> <i class="fas fa-heart" style="color: #e33e5a;"></i> 124</span>
+          </div>
+          <div class="comments-shares">
+            <span>18 comments • 7 shares</span>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button><i class="far fa-thumbs-up"></i> Like</button>
+          <button><i class="far fa-comment"></i> Comment</button>
+          <button><i class="fas fa-share"></i> Share</button>
+          <button><i class="fas fa-paper-plane"></i> Send</button>
+        </div>
+      </div>
+
+      <!-- Posts -->
+      <div class="post">
+        <div class="post-header">
+          <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Profile">
+          <div class="post-info">
+            <h3>Sarah Johnson</h3>
+            <p>Marketing Manager at Creative Solutions</p>
+            <span>2d • <i class="fas fa-globe-americas"></i></span>
+          </div>
+          <button class="more-options"><i class="fas fa-ellipsis-h"></i></button>
+        </div>
+        <div class="post-content">
+          <p>Excited to share that our team has launched a new marketing campaign! #MarketingSuccess #NewCampaign</p>
+        </div>
+        <div class="post-image">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Marketing Campaign">
+        </div>
+        <div class="post-stats">
+          <div class="reactions">
+            <span><i class="fas fa-thumbs-up" style="color: #0a66c2;"></i> <i class="fas fa-heart" style="color: #e33e5a;"></i> <i class="fas fa-lightbulb" style="color: #f5bb5c;"></i> 268</span>
+          </div>
+          <div class="comments-shares">
+            <span>42 comments • 15 shares</span>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button><i class="far fa-thumbs-up"></i> Like</button>
+          <button><i class="far fa-comment"></i> Comment</button>
+          <button><i class="fas fa-share"></i> Share</button>
+          <button><i class="fas fa-paper-plane"></i> Send</button>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-header">
+          <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Profile">
+          <div class="post-info">
+            <h3>Michael Chen</h3>
+            <p>Software Engineer at Tech Innovations</p>
+            <span>1d • <i class="fas fa-globe-americas"></i></span>
+          </div>
+          <button class="more-options"><i class="fas fa-ellipsis-h"></i></button>
+        </div>
+        <div class="post-content">
+          <p>Just solved a complex algorithm problem that's been bugging me for days! Sometimes the solution is simpler than you think. #Programming #Algorithms</p>
+        </div>
+        <div class="post-stats">
+          <div class="reactions">
+            <span><i class="fas fa-thumbs-up" style="color: #0a66c2;"></i> <i class="fas fa-lightbulb" style="color: #f5bb5c;"></i> 156</span>
+          </div>
+          <div class="comments-shares">
+            <span>28 comments • 5 shares</span>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button><i class="far fa-thumbs-up"></i> Like</button>
+          <button><i class="far fa-comment"></i> Comment</button>
+          <button><i class="fas fa-share"></i> Share</button>
+          <button><i class="fas fa-paper-plane"></i> Send</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Sidebar -->
+    <aside class="right-sidebar">
+      <div class="news-section">
+        <div class="news-header">
+          <h2>LinkedIn News</h2>
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <ul class="news-list">
+          <li>
+            <div class="news-bullet"></div>
+            <div class="news-content">
+              <h3>Big Tech hiring freezes continue</h3>
+              <p>Top news • 4,568 readers</p>
+            </div>
+          </li>
+          <li>
+            <div class="news-bullet"></div>
+            <div class="news-content">
+              <h3>Remote work trends in 2023</h3>
+              <p>2d ago • 1,256 readers</p>
+            </div>
+          </li>
+          <li>
+            <div class="news-bullet"></div>
+            <div class="news-content">
+              <h3>Startups raise record funding</h3>
+              <p>3d ago • 986 readers</p>
+            </div>
+          </li>
+          <li>
+            <div class="news-bullet"></div>
+            <div class="news-content">
+              <h3>AI revolution in healthcare</h3>
+              <p>4d ago • 2,345 readers</p>
+            </div>
+          </li>
+          <li>
+            <div class="news-bullet"></div>
+            <div class="news-content">
+              <h3>Sustainable business practices</h3>
+              <p>5d ago • 1,789 readers</p>
+            </div>
+          </li>
+        </ul>
+        <button class="show-more">Show more <i class="fas fa-chevron-down"></i></button>
+      </div>
+
+      <div class="ad-section">
+        <div class="ad-header">
+          <span>Ad</span>
+          <i class="fas fa-ellipsis-h"></i>
+        </div>
+        <div class="ad-content">
+          <p>Master in-demand skills with LinkedIn Learning</p>
+          <div class="ad-images">
+            <img src="1744909812280.jpeg" alt="User">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Learning">
+          </div>
+          <p>Asal, upgrade your skills with our courses</p>
+          <button>Learn More</button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-links">
+          <a href="#">About</a>
+          <a href="#">Accessibility</a>
+          <a href="#">Help Center</a>
+          <a href="#">Privacy & Terms</a>
+          <a href="#">Ad Choices</a>
+          <a href="#">Advertising</a>
+          <a href="#">Business Services</a>
+          <a href="#">Get the LinkedIn app</a>
+          <a href="#">More</a>
+        </div>
+        <div class="copyright">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+          <span>Developer Asal Alhawari © 2025</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    // Add any JavaScript functionality here
+    document.addEventListener('DOMContentLoaded', function() {
+      // Like button functionality
+      const likeButtons = document.querySelectorAll('.post-actions button:first-child');
+      likeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          this.classList.toggle('active');
+          if (this.classList.contains('active')) {
+            this.innerHTML = '<i class="fas fa-thumbs-up" style="color: #0a66c2;"></i> Like';
+          } else {
+            this.innerHTML = '<i class="far fa-thumbs-up"></i> Like';
+          }
+        });
+      });
+      
+      // Post form button
+      const postFormButton = document.querySelector('.input-area button');
+      if (postFormButton) {
+        postFormButton.addEventListener('click', function() {
+          alert('Post creation feature would open here');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
